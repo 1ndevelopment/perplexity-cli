@@ -1,13 +1,15 @@
 # Perplexity CLI
 
-A command-line wrapper for interacting with the Perplexities API.
-Designed to output results directly to the terminal.
+A command-line wrapper and GUI application for interacting with the Perplexity AI API.
+Features both terminal and graphical interfaces with animated text output and code block rendering.
 
 ## Features
 
 - 🔍 **Search queries** - Ask questions and get real-time information
 - 💬 **Chat conversations** - Interactive chat with the AI
 - 🎨 **Pretty terminal output** - Formatted responses with emojis and structure
+- 🖥️ **Modern GUI** - PyQt6-based graphical interface with animated text
+- 📝 **Code block rendering** - Automatic detection and syntax highlighting for code
 - ⚙️ **Customizable parameters** - Control model, temperature, max tokens
 - 📊 **Usage statistics** - See token consumption
 - 🔧 **Multiple output formats** - Pretty or JSON output
@@ -35,12 +37,30 @@ Designed to output results directly to the terminal.
 
 ## Usage
 
-### Basic Search
+### GUI Application (Recommended)
+```bash
+python run_gui.py
+```
+or
+```bash
+python gui.py
+```
+
+The GUI provides:
+- 🎬 **Animated text output** - Characters appear with typing animation
+- 📦 **Code block rendering** - Automatic detection and syntax highlighting
+- 🎨 **Dark theme** - Modern, easy-on-the-eyes interface
+- 💬 **Conversation history** - Maintains context across messages
+- ⚙️ **Settings panel** - Easy API key management
+
+### Command Line Interface
+
+#### Basic Search
 ```bash
 python wrapper.py search "What is the latest news about AI?"
 ```
 
-### Chat Conversation
+#### Chat Conversation
 ```bash
 python wrapper.py chat "Hello, how are you?"
 ```
