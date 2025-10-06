@@ -6,6 +6,7 @@ Helper script to set up Perplexity API key
 import os
 import subprocess
 import sys
+import getpass
 
 def setup_api_key():
     print("🔑 Perplexity API Key Setup")
@@ -22,7 +23,7 @@ def setup_api_key():
     # Get new API key
     print("\n📝 Enter your Perplexity API key:")
     print("   (You can find it at: https://www.perplexity.ai/settings/api)")
-    api_key = input("API Key: ").strip()
+    api_key = getpass.getpass("API Key: ").strip()
     
     if not api_key:
         print("❌ No API key provided. Exiting.")

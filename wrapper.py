@@ -13,6 +13,7 @@ from typing import Dict, Any, Optional
 import time
 import subprocess
 import platform
+import getpass
 
 class PerplexityWrapper:
     def __init__(self, api_key: str):
@@ -95,7 +96,7 @@ class PerplexityWrapper:
             choice = response["choices"][0]
             if "message" in choice:
                 content = choice["message"].get("content", "No content")
-                output.append(f"\n📝 Response:")
+                output.append(f"\n📝 Response:\n")
                 output.append(content)
             
             if "finish_reason" in choice:
@@ -147,7 +148,7 @@ def get_api_key() -> Optional[str]:
     api_key = os.getenv("PERPLEXITY_API_KEY")
     if not api_key:
         print("⚠️  PERPLEXITY_API_KEY environment variable not found.")
-        api_key = input("Enter your Perplexity API key: ").strip()
+        api_key = getpass.getpass("Enter your Perplexity API key: ").strip()
         if not api_key:
             print("❌ No API key provided. Exiting.")
             sys.exit(1)
