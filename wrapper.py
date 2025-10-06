@@ -11,8 +11,6 @@ import sys
 import requests
 from typing import Dict, Any, Optional
 import time
-import subprocess
-import platform
 import getpass
 
 class PerplexityWrapper:
@@ -111,35 +109,6 @@ class PerplexityWrapper:
         
         return "\n".join(output)
     
-    def say_text(self, text: str) -> None:
-        """
-        Convert text to speech using system TTS
-        """
-        try:
-            system = platform.system().lower()
-            
-            if system == "darwin":  # macOS
-                subprocess.run(["say", text], check=True)
-            elif system == "linux":
-                # Try espeak first, then festival
-                try:
-                    subprocess.run(["espeak", text], check=True)
-                except (subprocess.CalledProcessError, FileNotFoundError):
-                    try:
-                        subprocess.run(["festival", "--tts"], input=text, text=True, check=True)
-                    except (subprocess.CalledProcessError, FileNotFoundError):
-                        print("🔊 TTS not available - install espeak or festival")
-            elif system == "windows":
-                # Use PowerShell for Windows TTS
-                subprocess.run([
-                    "powershell", "-Command", 
-                    f"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('{text}')"
-                ], check=True)
-            else:
-                print("🔊 TTS not supported on this platform")
-                
-        except Exception as e:
-            print(f"🔊 TTS error: {e}")
 
 def get_api_key() -> Optional[str]:
     """
@@ -161,22 +130,20 @@ def main():
         epilog="""
 Examples:
   # Simple search query
-  python perplexity_wrapper.py search "What is the latest news about AI?"
+  python wrapper.py search "What is the latest news about AI?"
 
   # Chat conversation
-  python perplexity_wrapper.py chat "Hello, how are you?"
+  python wrapper.py chat "Hello, how are you?"
 
   # Use specific model
-  python perplexity_wrapper.py search "Explain quantum computing" --model llama-3.1-sonar-large-128k-chat
+  python wrapper.py search "Explain quantum computing" --model llama-3.1-sonar-large-128k-chat
 
   # JSON output format
-  python perplexity_wrapper.py search "What is Python?" --format json
+  python wrapper.py search "What is Python?" --format json
 
   # Custom parameters
-  python perplexity_wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
+  python wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
 
-  # Speak the response
-  python perplexity_wrapper.py search "What is the weather?" --say
         """
     )
     
@@ -207,9 +174,6 @@ Examples:
                               choices=["pretty", "json"], 
                               default="pretty",
                               help="Output format (default: pretty)")
-        subparser.add_argument("--say", 
-                              action="store_true",
-                              help="Speak the response using text-to-speech")
     
     args = parser.parse_args()
     
@@ -235,13 +199,6 @@ Examples:
         
         output_text = wrapper.format_output(response, args.format)
         print("\n" + output_text)
-        
-        # Speak the response if requested
-        if args.say and "choices" in response and response["choices"]:
-            content = response["choices"][0].get("message", {}).get("content", "")
-            if content:
-                print("\n🔊 Speaking response...")
-                wrapper.say_text(content)
     
     elif args.command == "chat":
         print(f"💬 Chat: {args.message}")
@@ -267,13 +224,6 @@ Examples:
         
         output_text = wrapper.format_output(response, args.format)
         print("\n" + output_text)
-        
-        # Speak the response if requested
-        if args.say and "choices" in response and response["choices"]:
-            content = response["choices"][0].get("message", {}).get("content", "")
-            if content:
-                print("\n🔊 Speaking response...")
-                wrapper.say_text(content)
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,6 @@ Designed to output results directly to the terminal.
 - ⚙️ **Customizable parameters** - Control model, temperature, max tokens
 - 📊 **Usage statistics** - See token consumption
 - 🔧 **Multiple output formats** - Pretty or JSON output
-- 🔊 **Text-to-speech** - Speak responses using system TTS
 
 ## Setup
 
@@ -31,31 +30,31 @@ Designed to output results directly to the terminal.
 
 3. **Make the script executable:**
    ```bash
-   chmod +x perplexity_wrapper.py
+   chmod +x wrapper.py
    ```
 
 ## Usage
 
 ### Basic Search
 ```bash
-python perplexity_wrapper.py search "What is the latest news about AI?"
+python wrapper.py search "What is the latest news about AI?"
 ```
 
 ### Chat Conversation
 ```bash
-python perplexity_wrapper.py chat "Hello, how are you?"
+python wrapper.py chat "Hello, how are you?"
 ```
 
 ### Advanced Options
 ```bash
 # Use a different model
-python perplexity_wrapper.py search "Explain quantum computing" --model llama-3.1-sonar-large-128k-online
+python wrapper.py search "Explain quantum computing" --model llama-3.1-sonar-large-128k-online
 
 # JSON output format
-python perplexity_wrapper.py search "What is Python?" --format json
+python wrapper.py search "What is Python?" --format json
 
 # Custom parameters
-python perplexity_wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
+python wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
 ```
 
 ## Available Models
@@ -73,7 +72,6 @@ python perplexity_wrapper.py search "Write a poem" --max-tokens 500 --temperatur
 - `--max-tokens` - Maximum tokens in response (default: 1000)
 - `--temperature` - Temperature for response generation (default: 0.2)
 - `--format` - Output format: pretty or json (default: pretty)
-- `--say` - Speak the response using text-to-speech
 
 ### Chat Command
 - `message` - The chat message to send
@@ -83,28 +81,17 @@ python perplexity_wrapper.py search "Write a poem" --max-tokens 500 --temperatur
 
 ```bash
 # Quick information lookup
-python perplexity_wrapper.py search "What is the weather like today?"
+python wrapper.py search "What is the weather like today?"
 
 # Technical explanation
-python perplexity_wrapper.py search "How does machine learning work?" --model llama-3.1-sonar-large-128k-online
+python wrapper.py search "How does machine learning work?" --model llama-3.1-sonar-large-128k-online
 
 # Creative writing
-python perplexity_wrapper.py chat "Write a short story about a robot" --temperature 0.8 --max-tokens 800
+python wrapper.py chat "Write a short story about a robot" --temperature 0.8 --max-tokens 800
 
 # Get structured data
-python perplexity_wrapper.py search "List the top 5 programming languages" --format json
-
-# Speak the response
-python perplexity_wrapper.py search "What is the weather like today?" --say
+python wrapper.py search "List the top 5 programming languages" --format json
 ```
-
-## Text-to-Speech Requirements
-
-The `--say` option uses system text-to-speech:
-
-- **Linux**: Requires `espeak` or `festival` (install with `sudo apt install espeak` or `sudo apt install festival`)
-- **macOS**: Uses built-in `say` command
-- **Windows**: Uses PowerShell TTS (built-in)
 
 ## Environment Variables
 
