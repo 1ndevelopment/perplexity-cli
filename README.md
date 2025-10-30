@@ -24,6 +24,7 @@ Features both terminal and graphical interfaces with animated text output and co
 
 ## Usage
 
+```bash
 ./ppx [-h] {search,chat} ...
 
 Perplexity AI API Wrapper - Command Line Interface
@@ -51,4 +52,4 @@ Examples:
 
   # Custom parameters
   python wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
-
+```
