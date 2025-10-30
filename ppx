@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 
-OPTION=$1
-INPUT="$2"
+#!/bin/sh
 
-./wrapper.py $OPTION "$INPUT"
+# Resolve the source path even if it's a symlink:
+SOURCE="$0"
+
+while [ -L "$SOURCE" ]; do
+  DIR="$(cd -P -- "$(dirname -- "$SOURCE")" && pwd -P)"
+  SOURCE="$(readlink "$SOURCE")"
+
+  # If $SOURCE was a relative symlink, resolve it relative to the symlink directory
+  case "$SOURCE" in
+    /*) ;; # absolute path, do nothing
+    *) SOURCE="$DIR/$SOURCE" ;;
+  esac
+done
+
+BASE_DIR="$(cd -P -- "$(dirname -- "$SOURCE")" && pwd -P)"
+
+# Finally run perpelxity-cli wrapper
+
+$BASE_DIR/wrapper.py $1 "$2"
