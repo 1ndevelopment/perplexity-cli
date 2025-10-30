@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+INPUT="$1"
+
+./wrapper.py chat "$INPUT"
