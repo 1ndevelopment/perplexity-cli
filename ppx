@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 
-#!/bin/sh
-
-# Resolve the source path even if it's a symlink:
-SOURCE="$0"
-
-while [ -L "$SOURCE" ]; do
+# Resolve the actual path of this script (following all symlinks)
+SOURCE="${BASH_SOURCE[0]:-$0}"
+while [ -h "$SOURCE" ]; do
   DIR="$(cd -P -- "$(dirname -- "$SOURCE")" && pwd -P)"
   SOURCE="$(readlink "$SOURCE")"
-
-  # If $SOURCE was a relative symlink, resolve it relative to the symlink directory
-  case "$SOURCE" in
-    /*) ;; # absolute path, do nothing
-    *) SOURCE="$DIR/$SOURCE" ;;
-  esac
+  # If SOURCE is relative, resolve it relative to the directory from above
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
-
 BASE_DIR="$(cd -P -- "$(dirname -- "$SOURCE")" && pwd -P)"
 
-# Finally run perpelxity-cli wrapper
+echo "Resolved BASE_DIR=$BASE_DIR"
 
-$BASE_DIR/wrapper.py $1 "$2"
+python3 "$BASE_DIR/wrapper.py" "$@"
