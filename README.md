@@ -15,12 +15,19 @@ Features both terminal and graphical interfaces with animated text output and co
    pip install -r requirements.txt
    ```
 
-2. **Set your API key:**
+2. **Set your API key**
 
    ```bash
    export PERPLEXITY_API_KEY="your_api_key_here"
    ```
    Or the script will prompt you to enter it when you run it.
+
+3. **Symlink ppx**
+
+   ```bash
+   sudo ln -s /path/to/perplexity-cli/ppx /usr/local/bin/ppx
+   ```
+   For easier access globally
 
 ## Usage
 
