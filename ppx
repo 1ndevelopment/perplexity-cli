@@ -10,6 +10,5 @@ while [ -h "$SOURCE" ]; do
 done
 BASE_DIR="$(cd -P -- "$(dirname -- "$SOURCE")" && pwd -P)"
 
-echo "Resolved BASE_DIR=$BASE_DIR"
-
+# Finally launch the wrapper
 python3 "$BASE_DIR/wrapper.py" "$@"
