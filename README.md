@@ -26,12 +26,11 @@ A command-line wrapper for interacting with the Perplexity AI API.
    ```bash
    sudo ln -s /path/to/perplexity-cli/ppx /usr/local/bin/ppx
    ```
-   For easier access globally
 
 ## Usage
 
 ```bash
-./ppx [-h] {search,chat} ...
+ppx [-h] {search,chat} ...
 
 Perplexity AI API Wrapper - Command Line Interface
 
