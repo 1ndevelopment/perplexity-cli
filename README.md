@@ -1,7 +1,6 @@
 # Perplexity CLI
 
-A command-line wrapper and GUI application for interacting with the Perplexity AI API.
-Features both terminal and graphical interfaces with animated text output and code block rendering.
+A command-line wrapper for interacting with the Perplexity AI API.
 
 ## Setup
 
@@ -46,17 +45,17 @@ options:
 
 Examples:
   # Simple search query
-  python wrapper.py search "What is the latest news about AI?"
+  ppx search "What is the latest news about AI?"
 
   # Chat conversation
-  python wrapper.py chat "Hello, how are you?"
+  ppx chat "Hello, how are you?"
 
   # Use specific model
-  python wrapper.py search "Explain quantum computing" --model llama-3.1-sonar-large-128k-chat
+  ppx search "Explain quantum computing" --model llama-3.1-sonar-large-128k-chat
 
   # JSON output format
-  python wrapper.py search "What is Python?" --format json
+  ppx search "What is Python?" --format json
 
   # Custom parameters
-  python wrapper.py search "Write a poem" --max-tokens 500 --temperature 0.8
+  ppx search "Write a poem" --max-tokens 500 --temperature 0.8
 ```
